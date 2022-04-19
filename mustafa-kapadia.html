@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AVRL Animation</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --red: #FF4C20;
+      --yellow: #FFEC50;
+      --green: #2A712C;
+      --blue: #26ACF6;
+      --circleSize: 50px;
+      --whiteText: #fff;
+      --teal: #007376;
+      --animationDuration: 9s;
+    }
+
+    .container {
+      width: fit-content;
+      margin-top: 4em;
+      margin-inline: auto;
+      display: grid;
+      grid-template-columns: repeat(2, var(--circleSize));
+      grid-template-rows: auto;
+      grid-gap: var(--circleSize);
+    }
+
+    .blob {
+      width: var(--circleSize);
+      height: var(--circleSize);
+      border-radius: 50%;
+      position: relative;
+      z-index: 5;
+      animation-duration: var(--animationDuration);
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+    }
+
+    .blob::before,
+    .blob::after {
+      content: "";
+      z-index: inherit;
+      position: absolute;
+      background: inherit;
+      height: inherit;
+      animation-duration: var(--animationDuration);
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+    }
+
+    .blob::after {
+      border-radius: 50%;
+      width: inherit;
+    }
+
+    button {
+      color: var(--whiteText);
+      background: var(--teal);
+      text-transform: capitalize;
+      padding: 0.25em 0.5em;
+      cursor: pointer;
+    }
+
+    /* Blob 1 Start */
+
+    .blob:first-of-type {
+      background: var(--red);
+    }
+
+    .blob.animate:first-of-type {
+      animation-name: blob1Animation;
+    }
+
+    .blob.animate:first-of-type::before {
+      z-index: 4;
+      left: calc(var(--circleSize) / 2);
+      top: 0;
+      animation-name: blob1BeforeAnimation;
+    }
+
+    .blob.animate:first-of-type::after {
+      left: 0;
+      top: 0;
+      animation-name: blob1AfterAnimation;
+
+    }
+
+    /* Blob 1 End */
+
+    /* Blob 2 Start */
+
+    .blob:nth-of-type(2) {
+      background: var(--yellow);
+      z-index: 4;
+    }
+
+    .blob.animate:nth-of-type(2) {
+      animation-name: blob2Animation;
+    }
+
+    .blob.animate:nth-of-type(2)::before {
+      top: calc(var(--circleSize) / 2);
+      left: 0;
+      width: inherit;
+      height: 0;
+      animation-name: blob2BeforeAnimation;
+    }
+
+    .blob.animate:nth-of-type(2)::after {
+      top: 0;
+      left: 0;
+      animation-name: blob2AfterAnimation;
+    }
+
+    /* Blob 2 End */
+
+    /* Blob 3 Start */
+
+    .blob:last-of-type {
+      z-index: 3;
+      background: var(--blue);
+    }
+
+    .blob.animate:last-of-type {
+      animation-name: blob3Animation;
+    }
+
+    .blob.animate:last-of-type::before {
+      width: 0;
+      right: calc(var(--circleSize) / 2);
+      animation-name: blob3BeforeAnimation;
+    }
+
+    .blob.animate:last-of-type::after {
+      width: inherit;
+      left: 0;
+      animation-name: blob3AfterAnimation;
+    }
+
+    /* Blob 3 End */
+
+    /* Blob 4 Start */
+
+    .blob:nth-of-type(3) {
+      z-index: 2;
+      background: var(--green);
+    }
+
+    .blob.animate:nth-of-type(3) {
+      animation-name: blob4Animation;
+    }
+
+    .blob.animate:nth-of-type(3)::before {
+      left: 0;
+      bottom: calc(var(--circleSize) / 2);
+      width: inherit;
+      height: 0;
+      animation-name: blob4BeforeAnimation;
+    }
+
+    .blob.animate:nth-of-type(3)::after {
+      left: 0;
+      top: 0;
+      animation-name: blob4AfterAnimation;
+    }
+
+    /* Blob 4 End */
+
+    /* Blob 1 Keyframes Start */
+    @keyframes blob1Animation {
+      0% {
+        background: var(--red);
+      }
+
+      12% {
+        background: var(--yellow);
+      }
+
+      24% {
+        background: var(--yellow);
+      }
+
+      36% {
+        background: var(--blue);
+      }
+
+      48% {
+        background: var(--blue);
+      }
+
+      60% {
+        background: var(--green);
+      }
+
+      72% {
+        background: var(--green);
+      }
+
+      84% {
+        background: var(--red);
+      }
+
+      96% {
+        background: var(--red);
+      }
+    }
+
+    @keyframes blob1BeforeAnimation {
+      0% {
+        background: var(--red);
+        width: 0px;
+      }
+
+      12% {
+        background: var(--yellow);
+        width: calc(var(--circleSize) * 2);
+      }
+
+      24% {
+        background: var(--yellow);
+        width: 0px;
+      }
+
+      36% {
+        background: var(--blue);
+        width: calc(var(--circleSize) * 2);
+      }
+
+      48% {
+        background: var(--blue);
+        width: 0px;
+      }
+
+      60% {
+        background: var(--green);
+        width: calc(var(--circleSize) * 2);
+      }
+
+      72% {
+        background: var(--green);
+        width: 0px;
+      }
+
+      84% {
+        background: var(--red);
+        width: calc(var(--circleSize) * 2);
+      }
+
+      96% {
+        background: var(--red);
+        width: 0px;
+      }
+    }
+
+    @keyframes blob1AfterAnimation {
+      0% {
+        background: var(--red);
+        transform: translate(0);
+      }
+
+      12% {
+        background: var(--yellow);
+        transform: translateX(calc(var(--circleSize) * 2));
+      }
+
+      24% {
+        transform: translate(0);
+        background: var(--yellow);
+      }
+
+      36% {
+        background: var(--blue);
+        transform: translateX(calc(var(--circleSize) * 2));
+      }
+
+      48% {
+        background: var(--blue);
+        transform: translate(0);
+      }
+
+      60% {
+        background: var(--green);
+        transform: translateX(calc(var(--circleSize) * 2));
+      }
+
+      72% {
+        background: var(--green);
+        transform: translate(0);
+      }
+
+      84% {
+        background: var(--red);
+        transform: translateX(calc(var(--circleSize) * 2));
+      }
+
+      96% {
+        background: var(--red);
+        transform: translate(0);
+      }
+    }
+
+    /* Blob 1 Keyframes End */
+
+    /* Blob 2 Keyframes Start */
+    @keyframes blob2Animation {
+      0% {
+        background: var(--yellow);
+      }
+
+      12% {
+        background: var(--blue);
+      }
+
+      24% {
+        background: var(--blue);
+      }
+
+      36% {
+        background: var(--green);
+      }
+
+      48% {
+        background: var(--green);
+      }
+
+      60% {
+        background: var(--red);
+      }
+
+      72% {
+        background: var(--red);
+      }
+
+      84% {
+        background: var(--yellow);
+      }
+
+      96% {
+        background: var(--yellow);
+      }
+    }
+
+    @keyframes blob2BeforeAnimation {
+      0% {
+        background: inherit;
+        height: 0px;
+      }
+
+      12% {
+        background: inherit;
+        height: calc(var(--circleSize) * 2);
+      }
+
+      24% {
+        background: inherit;
+        height: 0px;
+      }
+
+      36% {
+        background: inherit;
+        height: calc(var(--circleSize) * 2);
+      }
+
+      48% {
+        background: inherit;
+        height: 0px;
+      }
+
+      60% {
+        background: inherit;
+        height: calc(var(--circleSize) * 2);
+      }
+
+      72% {
+        background: inherit;
+        height: 0px;
+      }
+
+      84% {
+        background: inherit;
+        height: calc(var(--circleSize) * 2);
+      }
+
+      96% {
+        background: inherit;
+        height: 0px;
+      }
+    }
+
+    @keyframes blob2AfterAnimation {
+      0% {
+        background: inherit;
+        transform: translateY(0);
+      }
+
+      12% {
+        background: inherit;
+        transform: translateY(calc(var(--circleSize) * 2));
+      }
+
+      24% {
+        transform: translateY(0);
+        background: inherit;
+      }
+
+      36% {
+        background: inherit;
+        transform: translateY(calc(var(--circleSize) * 2));
+      }
+
+      48% {
+        background: inherit;
+        transform: translateY(0);
+      }
+
+      60% {
+        background: inherit;
+        transform: translateY(calc(var(--circleSize) * 2));
+      }
+
+      72% {
+        background: inherit;
+        transform: translateY(0);
+      }
+
+      84% {
+        background: inherit;
+        transform: translateY(calc(var(--circleSize) * 2));
+      }
+
+      96% {
+        background: inherit;
+        transform: translateY(0);
+      }
+    }
+
+    /* Blob 2 Keyframes End */
+
+
+    /* Blob 3 Keyframes Start */
+    @keyframes blob3Animation {
+      0% {
+        background: var(--blue);
+      }
+
+      12% {
+        background: var(--green);
+      }
+
+      24% {
+        background: var(--green);
+      }
+
+      36% {
+        background: var(--red);
+      }
+
+      48% {
+        background: var(--red);
+      }
+
+      60% {
+        background: var(--yellow);
+      }
+
+      72% {
+        background: var(--yellow);
+      }
+
+      84% {
+        background: var(--blue);
+      }
+
+      96% {
+        background: var(--blue);
+      }
+    }
+
+    @keyframes blob3BeforeAnimation {
+      0% {
+        background: inherit;
+        width: 0px;
+      }
+
+      12% {
+        background: inherit;
+        width: calc(var(--circleSize) * 2);
+      }
+
+      24% {
+        background: inherit;
+        width: 0px;
+      }
+
+      36% {
+        background: inherit;
+        width: calc(var(--circleSize) * 2);
+      }
+
+      48% {
+        background: inherit;
+        width: 0px;
+      }
+
+      60% {
+        background: inherit;
+        width: calc(var(--circleSize) * 2);
+      }
+
+      72% {
+        background: inherit;
+        width: 0px;
+      }
+
+      84% {
+        background: inherit;
+        width: calc(var(--circleSize) * 2);
+      }
+
+      96% {
+        background: inherit;
+        width: 0px;
+      }
+    }
+
+    @keyframes blob3AfterAnimation {
+      0% {
+        background: inherit;
+        transform: translate(0);
+      }
+
+      12% {
+        background: inherit;
+        transform: translateX(calc(0px - var(--circleSize) * 2));
+      }
+
+      24% {
+        transform: translate(0);
+        background: inherit;
+      }
+
+      36% {
+        background: inherit;
+        transform: translateX(calc(0px - var(--circleSize) * 2));
+      }
+
+      48% {
+        background: inherit;
+        transform: translate(0);
+      }
+
+      60% {
+        background: inherit;
+        transform: translateX(calc(0px - var(--circleSize) * 2));
+      }
+
+      72% {
+        background: inherit;
+        transform: translate(0);
+      }
+
+      84% {
+        background: inherit;
+        transform: translateX(calc(0px - var(--circleSize) * 2));
+      }
+
+      96% {
+        background: inherit;
+        transform: translate(0);
+      }
+    }
+
+    /* Blob 3 Keyframes End */
+
+    /* Blob 4 Keyframes Start*/
+    @keyframes blob4Animation {
+      0% {
+        background: var(--green);
+      }
+
+      12% {
+        background: var(--red);
+      }
+
+      24% {
+        background: var(--red);
+      }
+
+      36% {
+        background: var(--yellow);
+      }
+
+      48% {
+        background: var(--yellow);
+      }
+
+      60% {
+        background: var(--blue);
+      }
+
+      72% {
+        background: var(--blue);
+      }
+
+      84% {
+        background: var(--green);
+      }
+
+      96% {
+        background: var(--green);
+      }
+    }
+
+    @keyframes blob4BeforeAnimation {
+      0% {
+        background: inherit;
+        height: 0px;
+      }
+
+      12% {
+        background: inherit;
+        height: calc(var(--circleSize) * 2);
+      }
+
+      24% {
+        background: inherit;
+        height: 0px;
+      }
+
+      36% {
+        background: inherit;
+        height: calc(var(--circleSize) * 2);
+      }
+
+      48% {
+        background: inherit;
+        height: 0px;
+      }
+
+      60% {
+        background: inherit;
+        height: calc(var(--circleSize) * 2);
+      }
+
+      72% {
+        background: inherit;
+        height: 0px;
+      }
+
+      84% {
+        background: inherit;
+        height: calc(var(--circleSize) * 2);
+      }
+
+      96% {
+        background: inherit;
+        height: 0px;
+      }
+    }
+
+    @keyframes blob4AfterAnimation {
+      0% {
+        background: inherit;
+        transform: translateY(0);
+      }
+
+      12% {
+        background: inherit;
+        transform: translateY(calc(0px - var(--circleSize) * 2));
+      }
+
+      24% {
+        transform: translateY(0);
+        background: inherit;
+      }
+
+      36% {
+        background: inherit;
+        transform: translateY(calc(0px - var(--circleSize) * 2));
+      }
+
+      48% {
+        background: inherit;
+        transform: translateY(0);
+      }
+
+      60% {
+        background: inherit;
+        transform: translateY(calc(0px - var(--circleSize) * 2));
+      }
+
+      72% {
+        background: inherit;
+        transform: translateY(0);
+      }
+
+      84% {
+        background: inherit;
+        transform: translateY(calc(0px - var(--circleSize) * 2));
+      }
+
+      96% {
+        background: inherit;
+        transform: translateY(0);
+      }
+    }
+
+    /* Blob 4 Keyframes End */
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <button id="start">start</button>
+    <button id="stop">stop</button>
+    <script>
+      const blobs = document.getElementsByClassName("blob");
+      const startButton = document.getElementById("start");
+      const stopButton = document.getElementById("stop");
+
+      startButton.addEventListener("click", () => {
+        for (let blob of blobs) {
+          blob.classList.add("animate");
+        }
+      })
+
+      stopButton.addEventListener("click", () => {
+        for (let blob of blobs) {
+          blob.classList.remove("animate");
+        }
+      })
+    </script>
+  </div>
+</body>
+
+</html>
